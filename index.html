@@ -1,9 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title> Website </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - Varivashyap</title>
+    <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="Personal website" />
 </head>
-<body>
-    <h1> Welcome to my website! </h1>
+<body id="top">
+    <header class="site-header" role="banner">
+        <!-- Logo scrolls to top without adding history entry -->
+        <a class="brand" href="#" id="scrollTop">
+            <img src="https://picsum.photos/40" alt="logo" />
+        </a>
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+            <a href="#about" id="aboutLink">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact Me</a>
+        </nav>
+    </header>
+
+    <div class="page-wrap">
+        <section class="card" role="main" aria-label="Profile">
+            <div class="card-left">
+                <!-- Replace the src with a local image (e.g. assets/hero.jpg) -->
+                <img src="https://picsum.photos/900/1200" alt="Profile photo" />
+            </div>
+            <div class="card-right">
+                <h1 class="name">Varivashya Poladi</h1>
+                <h2 class="information">Undergraduate Student</h2>
+                <h2 class="information2">Mathematics and Computing</h2>
+                <h2 class="affiliation">Indian Institute of Science</h2>
+                <div class="actions">
+                    <a class="btn" href="blog.html">Visit Blog</a>
+                    <a class="btn" href="contact.html">Contact Me</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <section id="about" class="site-section" aria-labelledby="about-title">
+        <div class="container">
+            <p class="intro-text">
+                I am a senior pursuing a B.Tech. in Mathematics and Computing at the Indian Institute of Science, Bangalore. 
+                I am interested in machine learning, artificial intelligence, and the design of intelligent systems. 
+                I aim to contribute to research that advances the reliability, interpretability, and real-world applicability of AI.
+            </p>
+        </div>
+    </section>
+
+    <section id="research" class="site-section" aria-labelledby="research-title">
+        <div class="container">
+            <h2 id="research-title" class="research-title">Research Interests</h2>
+            <p class="research-content">
+                My research interests span machine learning, model alignment, generative AI, natural language processing, and computer vision. 
+                I am particularly focused on developing reliable and scalable intelligent systems, with an emphasis on robustness, interpretability, 
+                and practical real-world deployment of large models.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Scroll to top on logo click without affecting browser history
+        document.getElementById('scrollTop').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link navigation
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        });
+        // Scroll to About section without adding to history
+        document.getElementById('aboutLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
 </body>
 </html>

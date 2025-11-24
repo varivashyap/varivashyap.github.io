@@ -1,0 +1,36 @@
+name: Build Blog Pages
+
+on:
+  push:
+    paths:
+      - 'Blogs/*.md'
+      - 'generate_blog_pages.js'
+      - 'blog.html'
+      - 'styles.css'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install marked gray-matter
+
+      - name: Generate blog pages
+        run: node generate_blog_pages.js
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m 'Auto-generate blog pages and update posts.json'
+          git push
+        continue-on-error: true

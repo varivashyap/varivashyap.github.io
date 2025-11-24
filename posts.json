@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Post 1",
+    "summary": "Hi! This is a sample post.",
+    "tags": ["News", "Research"],
+    "date": "Oct 05, 2025",
+    "link": "#"
+  },
+  {
+    "title": "Post 2",
+    "summary": "Another interesting article about ML.",
+    "tags": ["Machine Learning", "AI"],
+    "date": "Oct 10, 2025",
+    "link": "#"
+  }
+]
