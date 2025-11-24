@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const marked = require('marked');
+const { marked } = require('marked'); // <-- fixed import
 const matter = require('gray-matter');
 
 const blogsDir = path.join(__dirname, 'Blogs');
@@ -37,7 +37,31 @@ fs.readdirSync(blogsDir).forEach(file => {
     posts.push(meta);
 
     // Generate HTML page
-    const html = `<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n  <title>${meta.title}</title>\n  <link rel=\"stylesheet\" href=\"${stylesHref}\" />\n  <meta name=\"description\" content=\"${meta.summary}\" />\n</head>\n<body id=\"top\">\n${headerHtml}\n<main class=\"page blog-main\">\n<article class=\"blog-post-ref\">\n  <h1 class=\"blog-title\">${meta.title}</h1>\n  <p class=\"blog-summary\">${meta.summary}</p>\n  <div class=\"blog-meta-row\">\n    <span class=\"blog-tags\">${(meta.tags || []).map(tag => `<span class=\"blog-tag\">${tag}</span>`).join('')}</span>\n    <span class=\"blog-date\">📅 ${meta.date}</span>\n  </div>\n  <hr />\n  <div class=\"blog-content\">${marked(content)}</div>\n</article>\n</main>\n</body>\n</html>`;
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${meta.title}</title>
+  <link rel="stylesheet" href="${stylesHref}" />
+  <meta name="description" content="${meta.summary}" />
+</head>
+<body id="top">
+${headerHtml}
+<main class="page blog-main">
+<article class="blog-post-ref">
+  <h1 class="blog-title">${meta.title}</h1>
+  <p class="blog-summary">${meta.summary}</p>
+  <div class="blog-meta-row">
+    <span class="blog-tags">${(meta.tags || []).map(tag => `<span class="blog-tag">${tag}</span>`).join('')}</span>
+    <span class="blog-date">📅 ${meta.date}</span>
+  </div>
+  <hr />
+  <div class="blog-content">${marked(content)}</div>
+</article>
+</main>
+</body>
+</html>`;
     const outPath = path.join(__dirname, meta.link);
     fs.writeFileSync(outPath, html, 'utf8');
   }
