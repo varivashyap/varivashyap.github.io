@@ -7,6 +7,9 @@ on:
       - 'generate_blog_pages.js'
       - 'blog.html'
       - 'styles.css'
+    paths-ignore:
+      - 'Blogs/*.html'
+      - 'posts.json'
 
 jobs:
   build:
@@ -21,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install marked gray-matter
+        run: npm ci || npm install marked gray-matter
 
       - name: Generate blog pages
         run: node generate_blog_pages.js
@@ -31,6 +34,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m 'Auto-generate blog pages and update posts.json'
+          git diff --quiet || git commit -m 'Auto-generate blog pages and update posts.json'
           git push
-        continue-on-error: true
